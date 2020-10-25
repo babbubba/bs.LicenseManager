@@ -170,7 +170,7 @@ namespace bs.LicensesManager.Core.Service
                 {
                     Active = true,
                     Product = product,
-                    Version = version,
+                    Name = version,
                 };
 
                 await licenseRepository.CreateVersion(entity);

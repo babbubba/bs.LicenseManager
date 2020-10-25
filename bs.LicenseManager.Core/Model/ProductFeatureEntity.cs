@@ -15,6 +15,10 @@ namespace bs.LicensesManager.Core.Model
         public virtual string Key { get; set; }
         public virtual bool Active { get; set; }
 
+        public override string ToString()
+        {
+            return $"Feature: {Key}";
+        }
         public class Map : ClassMapping<ProductFeatureEntity>
         {
             public Map()

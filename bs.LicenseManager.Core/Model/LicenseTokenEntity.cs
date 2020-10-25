@@ -29,6 +29,11 @@ namespace bs.LicensesManager.Core.Model
         public virtual DateTime EmitDate { get; set; }
         public virtual DateTime ExpireDate { get; set; }
 
+        public override string ToString()
+        {
+            return $"Licese ID: {Id} (expire: {ExpireDate.ToString("dd-MM-yy")})";
+        }
+
         public class Map : ClassMapping<LicenseTokenEntity>
         {
             public Map()

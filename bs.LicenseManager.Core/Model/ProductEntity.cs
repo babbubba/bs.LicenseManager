@@ -41,6 +41,8 @@ namespace bs.LicensesManager.Core.Model
                 {
                     map.Unique(true);
                     map.NotNullable(true);
+                    map.Length(50);
+
                 });
                 Property(p => p.Description, map =>
                 {

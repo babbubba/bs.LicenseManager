@@ -9,9 +9,14 @@ namespace bs.LicensesManager.Core.Model
     public class ProductVersionEntity : IPersistentEntity
     {
         public virtual Guid Id { get; set; }
-        public virtual string Version { get; set; }
+        public virtual string Name { get; set; }
         public virtual bool Active { get; set; }
         public virtual ProductEntity Product { get; set; }
+
+        public override string ToString()
+        {
+            return $"Version: {Name}";
+        }
 
         public class Map : ClassMapping<ProductVersionEntity>
         {
@@ -27,10 +32,11 @@ namespace bs.LicensesManager.Core.Model
                     x.UnsavedValue(Guid.Empty);
                 });
 
-                Property(p => p.Version, map =>
+                Property(p => p.Name, map =>
                 {
                     map.UniqueKey("UQ__Versions_Product");
                     map.NotNullable(true);
+                    map.Length(16);
                 });
 
                 ManyToOne(x => x.Product, map =>
