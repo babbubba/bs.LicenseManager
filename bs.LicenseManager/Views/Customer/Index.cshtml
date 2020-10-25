@@ -1,0 +1,38 @@
+﻿@model bs.LicensesManager.Core.ViewModel.CustomersViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Elenco clienti</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Crea nuovo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email di contatto</th>
+            <th>Attivo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CustomersList) {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.EmailContact</td>
+            <td>@item.Active</td>
+            <td>
+                @Html.ActionLink("Modifica", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Elimina", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
