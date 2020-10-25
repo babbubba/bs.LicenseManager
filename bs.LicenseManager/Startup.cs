@@ -2,6 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using bs.Data;
+using bs.Data.Interfaces;
+using bs.LicensesManager.Core.Mapping;
+using bs.LicensesManager.Core.Repository;
+using bs.LicensesManager.Core.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +29,19 @@ namespace bs.LicenseManager
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddBsData(new DbContext
+            {
+                ConnectionString = "Data Source=.\\bs.LicenseManager.Test.db;Version=3;BinaryGuid=False;",
+                DatabaseEngineType = DbType.SQLite,
+                Create = false,
+                Update = true,
+                LookForEntitiesDllInCurrentDirectoryToo = false
+            });
+            services.AddScoped<LicenseRepository>();
+            services.AddScoped<LicenseService>();
+
+            services.AddAutoMapper(typeof(MappingProfile));
+
             services.AddControllersWithViews();
         }
 

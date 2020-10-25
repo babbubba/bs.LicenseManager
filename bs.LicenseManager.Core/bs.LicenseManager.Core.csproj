@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,12 +7,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="bs.Data" Version="3.0.4" />
+    <PackageReference Include="Standard.Licensing" Version="1.1.5" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\bs.LicenseManager.Core\bs.LicenseManager.Core.csproj" />
-  </ItemGroup>
-
-
 
 </Project>
