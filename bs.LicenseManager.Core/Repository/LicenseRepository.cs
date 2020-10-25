@@ -1,12 +1,12 @@
 ﻿using bs.Data.Interfaces;
-using bs.LicensesManager.Core.Model;
+using bs.LicenseManager.Core.Model;
 using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace bs.LicensesManager.Core.Repository
+namespace bs.LicenseManager.Core.Repository
 {
     public class LicenseRepository : bs.Data.Repository
     {
@@ -48,6 +48,11 @@ namespace bs.LicensesManager.Core.Repository
             return await GetByIdAsync<CustomerEntity>(customerId);
         }
 
+        internal async Task<IEnumerable<CustomerEntity>> GetCustomers()
+        {
+            return await Query<CustomerEntity>().ToListAsync();
+        }
+
         internal async Task<LicenseTokenEntity> GetLicenseToken(Guid licenseTokenId)
         {
             return await GetByIdAsync<LicenseTokenEntity>(licenseTokenId);
@@ -72,9 +77,20 @@ namespace bs.LicensesManager.Core.Repository
         //    return await Query<ProductFeatureEntity>().Where(ltf => productFeatureKeys.Contains(ltf.Key)).ToListAsync();
         //}
 
+        internal async Task<IEnumerable<ProductEntity>> GetProducts()
+        {
+            return await Query<ProductEntity>().ToListAsync();
+
+        }
+
         internal async Task<ProductVersionEntity> GetProductVersion(Guid productVersionId)
         {
             return await GetByIdAsync<ProductVersionEntity>(productVersionId);
+        }
+
+        internal async Task UpdateCustomer(CustomerEntity entity)
+        {
+            await UpdateAsync(entity);
         }
 
         internal async Task UpdateFeature(ProductFeatureEntity entity)
@@ -95,16 +111,6 @@ namespace bs.LicensesManager.Core.Repository
         internal async Task UpdateVersion(ProductVersionEntity entity)
         {
             await UpdateAsync(entity);
-        }
-
-        internal async Task UpdateCustomer(CustomerEntity entity)
-        {
-            await UpdateAsync(entity);
-        }
-
-        internal async Task<IEnumerable<CustomerEntity>> GetCustomers()
-        {
-            return await Query<CustomerEntity>().ToListAsync(); 
         }
     }
 }

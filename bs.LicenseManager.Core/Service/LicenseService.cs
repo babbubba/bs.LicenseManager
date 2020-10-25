@@ -1,23 +1,22 @@
 ﻿using AutoMapper;
 using bs.Data.Helpers;
 using bs.Data.Interfaces;
-using bs.LicensesManager.Core.Model;
-using bs.LicensesManager.Core.Repository;
-using bs.LicensesManager.Core.ViewModel;
+using bs.LicenseManager.Core.ViewModel;
+using bs.LicenseManager.Core.Model;
+using bs.LicenseManager.Core.Repository;
 using Standard.Licensing;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace bs.LicensesManager.Core.Service
+namespace bs.LicenseManager.Core.Service
 {
     public class LicenseService
     {
         private static string passPhrase = "Sono un frase di prova tanto per fare qualche chiave di prova";
         private readonly LicenseRepository licenseRepository;
-        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
-
+        private readonly IUnitOfWork unitOfWork;
         public LicenseService(IUnitOfWork unitOfWork, IMapper mapper, LicenseRepository licenseRepository)
         {
             this.unitOfWork = unitOfWork;
@@ -71,27 +70,6 @@ namespace bs.LicensesManager.Core.Service
                 await licenseRepository.UpdateProduct(productVersion.Product);
 
                 return entity.Id;
-            });
-        }
-
-        public async Task<CustomerViewModel> GetCustomer(string id)
-        {
-            return await unitOfWork.RunInTransactionAsync(async () =>
-            {
-                return mapper.Map<CustomerViewModel>(await licenseRepository.GetCustomer(Guid.Parse(id)));
-            });
-        }
-
-        public async  Task UpdateCustomer(string id, string name, string emailContact, bool active)
-        {
-            await unitOfWork.RunInTransactionAsync(async () =>
-            {
-                var entity = await licenseRepository.GetCustomer(Guid.Parse(id));
-                entity.Active = active;
-                entity.Name = name;
-                entity.EmailContact = emailContact;
-
-                await licenseRepository.UpdateCustomer(entity);
             });
         }
 
@@ -217,15 +195,81 @@ namespace bs.LicensesManager.Core.Service
             });
         }
 
-        public async Task<CustomersViewModel> GetCustomersView()
+        public async Task<CustomerViewModel> GetCustomer(string id)
+        {
+            return await unitOfWork.RunInTransactionAsync(async () =>
+            {
+                return mapper.Map<CustomerViewModel>(await licenseRepository.GetCustomer(Guid.Parse(id)));
+            });
+        }
+
+        public async Task<CustomersIndexView> GetCustomersIndexView()
         {
             return await unitOfWork.RunInTransactionAsync(async () =>
             {
                 var customers = await licenseRepository.GetCustomers();
-                return new CustomersViewModel()
+                return new CustomersIndexView()
                 {
                     CustomersList = mapper.Map<IList<CustomerViewModel>>(customers)
                 };
+            });
+        }
+
+        public async Task<ProductViewModel> GetProduct(string id)
+        {
+            return await unitOfWork.RunInTransactionAsync(async () =>
+            {
+                return mapper.Map<ProductViewModel>(await licenseRepository.GetProduct(Guid.Parse(id)));
+            });
+        }
+
+        public async Task<ProductDetailView> GetProductDetailsView(string id)
+        {
+            return await unitOfWork.RunInTransactionAsync(async () =>
+            {
+                var product = await licenseRepository.GetProduct(Guid.Parse(id));
+                return new ProductDetailView()
+                {
+                    Product = mapper.Map<ProductViewModel>(product)
+                };
+            });
+        }
+
+        public async Task<ProductsIndexView> GetProductsIndexView()
+        {
+            return await unitOfWork.RunInTransactionAsync(async () =>
+            {
+                var products = await licenseRepository.GetProducts();
+                return new ProductsIndexView()
+                {
+                    ProductsList = mapper.Map<IList<ProductViewModel>>(products)
+                };
+            });
+        }
+
+        public async Task UpdateCustomer(string id, string name, string emailContact, bool active)
+        {
+            await unitOfWork.RunInTransactionAsync(async () =>
+            {
+                var entity = await licenseRepository.GetCustomer(Guid.Parse(id));
+                entity.Active = active;
+                entity.Name = name;
+                entity.EmailContact = emailContact;
+
+                await licenseRepository.UpdateCustomer(entity);
+            });
+        }
+
+        public async Task UpdateProduct(string id, string name, string description, bool active)
+        {
+            await unitOfWork.RunInTransactionAsync(async () =>
+            {
+                var entity = await licenseRepository.GetProduct(Guid.Parse(id));
+                entity.Active = active;
+                entity.Name = name;
+                entity.Description = description;
+
+                await licenseRepository.UpdateProduct(entity);
             });
         }
     }

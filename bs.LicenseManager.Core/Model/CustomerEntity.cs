@@ -5,7 +5,7 @@ using NHibernate.Mapping.ByCode.Conformist;
 using System;
 using System.Collections.Generic;
 
-namespace bs.LicensesManager.Core.Model
+namespace bs.LicenseManager.Core.Model
 {
     public class CustomerEntity : IPersistentEntity
     {

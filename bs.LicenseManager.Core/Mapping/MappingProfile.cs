@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using bs.LicensesManager.Core.Model;
-using bs.LicensesManager.Core.ViewModel;
+using bs.LicenseManager.Core.Model;
+using bs.LicenseManager.Core.ViewModel;
 using Standard.Licensing;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace bs.LicensesManager.Core.Mapping
+namespace bs.LicenseManager.Core.Mapping
 {
     public class MappingProfile : Profile
     {

@@ -3,82 +3,82 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using bs.LicenseManager.Core.Service;
 using bs.LicenseManager.Core.ViewModel;
+using bs.LicenseManager.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace bs.LicencesManager.Controllers
+namespace bs.LicenseManager.Controllers
 {
-    public class CustomerController : Controller
+    public class ProductController : Controller
     {
         private readonly IMapper mapper;
         private readonly LicenseService licenseService;
 
-        public CustomerController(IMapper mapper,LicenseService licenseService)
+        public ProductController(IMapper mapper, LicenseService licenseService)
         {
             this.mapper = mapper;
             this.licenseService = licenseService;
         }
-        // GET: Customer
+        // GET: Product
         public async Task<ActionResult> Index()
         {
-           return View(await licenseService.GetCustomersIndexView());
+            return View(await licenseService.GetProductsIndexView());
         }
 
-        // GET: Customer/Details/5
-        public ActionResult Details(int id)
+        // GET: Product/Details/5
+        public async Task<ActionResult> Details(string id)
         {
-            return View();
+            return View(await licenseService.GetProductDetailsView(id));
         }
 
-        // GET: Customer/Create
+        // GET: Product/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customer/Create
+        // POST: Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CustomerViewModel model)
+        public async Task<ActionResult> Create(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var customerId = await licenseService.CreateCustomer(model.Name, model.EmailContact);
+                var entityId = await licenseService.CreateProduct( model.Name, model.Description);
                 return RedirectToAction(nameof(Index));
             }
 
             return View();
         }
 
-        // GET: Customer/Edit/5
+        // GET: Product/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
-            return View(await licenseService.GetCustomer(id));
+            return View(await licenseService.GetProduct(id));
         }
 
-        // POST: Customer/Edit/5
+        // POST: Product/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(CustomerViewModel model)
+        public async Task<ActionResult> Edit(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
-                await licenseService.UpdateCustomer(model.Id, model.Name, model.EmailContact, model.Active);
+                await licenseService.UpdateProduct(model.Id, model.Name, model.Description, model.Active);
                 return RedirectToAction(nameof(Index));
             }
 
             return View();
         }
 
-        // GET: Customer/Delete/5
+        // GET: Product/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Customer/Delete/5
+        // POST: Product/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

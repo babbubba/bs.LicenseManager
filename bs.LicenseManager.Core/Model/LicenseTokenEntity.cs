@@ -6,7 +6,7 @@ using Standard.Licensing;
 using System;
 using System.Collections.Generic;
 
-namespace bs.LicensesManager.Core.Model
+namespace bs.LicenseManager.Core.Model
 {
     public class LicenseTokenEntity : IPersistentEntity
     {

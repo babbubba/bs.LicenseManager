@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using bs.LicensesManager.Core.Service;
+using bs.LicenseManager.Core.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using bs.Data;
 using bs.Data.Interfaces;
-using bs.LicensesManager.Core.Repository;
+using bs.LicenseManager.Core.Repository;
 using System.Threading.Tasks;
 
 namespace bs.LicensesManager.Core.Service.Tests

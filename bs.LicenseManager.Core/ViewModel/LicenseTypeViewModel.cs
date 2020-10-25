@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace bs.LicensesManager.Core.ViewModel
+namespace bs.LicenseManager.Core.ViewModel
 {
     public class LicenseTypeViewModel
     {

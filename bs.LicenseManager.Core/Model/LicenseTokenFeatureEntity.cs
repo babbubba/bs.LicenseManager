@@ -4,7 +4,7 @@ using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using System;
 
-namespace bs.LicensesManager.Core.Model
+namespace bs.LicenseManager.Core.Model
 {
     public class LicenseTokenFeatureEntity : IPersistentEntity
     {

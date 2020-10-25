@@ -1,0 +1,20 @@
+﻿@model bs.LicenseManager.Core.ViewModel.ProductDetailView
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Dettagli</h1>
+
+<div>
+    <h4>Dettaglio Prodotto</h4>
+    <hr />
+    <dl class="row">
+        <dt>Nome</dt>
+        <dd>@Model.Product.Name</dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Modifica", "Edit", new {  id = Model.Product.Id }) |
+    <a asp-action="Index">Torna alla List</a>
+</div>

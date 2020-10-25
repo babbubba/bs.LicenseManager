@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace bs.LicensesManager.Core.Model
+namespace bs.LicenseManager.Core.Model
 {
     public class ProductEntity : IPersistentEntity
     {

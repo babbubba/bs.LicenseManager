@@ -1,11 +1,11 @@
-﻿@model bs.LicenseManager.Core.ViewModel.CustomersIndexView
+﻿@model bs.LicenseManager.Core.ViewModel.ProductsIndexView
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Elenco clienti</title>
+    <title>Elenco prodotti</title>
 </head>
 <body>
 <p>
@@ -15,18 +15,19 @@
     <thead>
         <tr>
             <th>Nome</th>
-            <th>Email di contatto</th>
+            <th>Descrizione</th>
             <th>Attivo</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.CustomersList) {
+@foreach (var item in Model.ProductsList) {
         <tr>
             <td>@item.Name</td>
-            <td>@item.EmailContact</td>
+            <td>@item.Description</td>
             <td>@item.Active</td>
             <td>
+                @Html.ActionLink("Dettaglio", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Modifica", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Elimina", "Delete", new { id = item.Id })
             </td>

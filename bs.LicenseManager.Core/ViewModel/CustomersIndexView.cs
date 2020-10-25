@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace bs.LicensesManager.Core.ViewModel
+namespace bs.LicenseManager.Core.ViewModel
 {
-    public class CustomersViewModel
+    public class CustomersIndexView
     {
         public IList<CustomerViewModel> CustomersList { get; set; }
     }
