@@ -1,0 +1,10 @@
+<mat-list>
+    <mat-list-item *ngFor="let customer of vm.customerList">
+      <mat-icon matListIcon>folder</mat-icon>
+      <h3 matLine> {{customer.name}} </h3>
+      <p matLine>
+        <span> {{customer.emailContact}} </span>
+        <span class="demo-2"> -- {{message.isActive}} </span>
+      </p>
+    </mat-list-item>
+  </mat-list>
